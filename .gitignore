@@ -1,1 +1,6 @@
 .project
+/target/
+target
+.settings/*
+!.settings/.jsdtscope
+.classpath
