@@ -124,6 +124,18 @@
 			<type>pom</type>
 		</dependency>
 
+		<!-- PrettyFaces URL rewriting for JSF 2.x -->
+		<dependency>
+			<groupId>org.ocpsoft.rewrite</groupId>
+			<artifactId>rewrite-servlet</artifactId>
+			<version>2.0.12.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ocpsoft.rewrite</groupId>
+			<artifactId>rewrite-config-prettyfaces</artifactId>
+			<version>2.0.12.Final</version>
+		</dependency>
+
 		<!-- Now we declare any tools needed -->
 
 		<!-- Annotation processor to generate the JPA 2.0 metamodel classes for 

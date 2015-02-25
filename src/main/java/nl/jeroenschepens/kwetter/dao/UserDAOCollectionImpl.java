@@ -21,7 +21,7 @@ public class UserDAOCollectionImpl implements UserDAO {
 
 	@Override
 	public void create(User user) {
-		users.put(user.getName(), user);
+		users.put(user.getName().toLowerCase(), user);
 	}
 
 	@Override
@@ -41,6 +41,6 @@ public class UserDAOCollectionImpl implements UserDAO {
 
 	@Override
 	public User find(String username) {
-		return users.get(username);
+		return users.get(username.toLowerCase());
 	}
 }
