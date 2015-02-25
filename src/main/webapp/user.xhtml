@@ -5,8 +5,10 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
+		<div id="sidebar">
+			<ui:include src="/WEB-INF/components/usersidebar.xhtml" />
+		</div>
 		<h1>Kwetter</h1>
-		<p>Welkom bij Kwetter! Reeds #{kwetterController.count()}
-			gebruikers gingen u voor!</p>
+		<p>Welkom bij Kwetter!</p>
 	</ui:define>
 </ui:composition>

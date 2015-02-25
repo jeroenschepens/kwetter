@@ -2,13 +2,15 @@ package nl.jeroenschepens.kwetter.service;
 
 import java.util.Date;
 import java.util.List;
+
+import javax.ejb.Stateless;
+
 import nl.jeroenschepens.kwetter.dao.UserDAO;
 import nl.jeroenschepens.kwetter.dao.UserDAOCollectionImpl;
 import nl.jeroenschepens.kwetter.domain.Tweet;
 import nl.jeroenschepens.kwetter.domain.User;
-//import javax.ejb.Stateless;
 
-//@Stateless
+@Stateless
 public class KwetterService {
 
 	private UserDAO userDAO = new UserDAOCollectionImpl();
