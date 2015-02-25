@@ -78,20 +78,39 @@ public class User implements Serializable {
 
 	@Override
 	public int hashCode() {
-		int hash = 0;
-		hash += (name != null ? name.hashCode() + bio.hashCode() : 0);
-		return hash;
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((bio == null) ? 0 : bio.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((web == null) ? 0 : web.hashCode());
+		return result;
 	}
 
 	@Override
-	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the name fields
-		// are not set
-		if (!(object instanceof User)) {
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
 			return false;
-		}
-		User other = (User) object;
-		return this.hashCode() == other.hashCode();
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (bio == null) {
+			if (other.bio != null)
+				return false;
+		} else if (!bio.equals(other.bio))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (web == null) {
+			if (other.web != null)
+				return false;
+		} else if (!web.equals(other.web))
+			return false;
+		return true;
 	}
 
 	@Override

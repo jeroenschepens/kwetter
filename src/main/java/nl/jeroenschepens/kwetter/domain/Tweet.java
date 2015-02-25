@@ -48,18 +48,41 @@ public class Tweet implements Serializable {
 
 	@Override
 	public int hashCode() {
-		int hash = 0;
-		hash += (tweet != null ? tweet.hashCode() + postDate.hashCode() : 0);
-		return hash;
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((postDate == null) ? 0 : postDate.hashCode());
+		result = prime * result
+				+ ((postedFrom == null) ? 0 : postedFrom.hashCode());
+		result = prime * result + ((tweet == null) ? 0 : tweet.hashCode());
+		return result;
 	}
 
 	@Override
-	public boolean equals(Object object) {
-		if (!(object instanceof Tweet)) {
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
 			return false;
-		}
-		Tweet other = (Tweet) object;
-		return this.hashCode() == other.hashCode();
+		if (getClass() != obj.getClass())
+			return false;
+		Tweet other = (Tweet) obj;
+		if (postDate == null) {
+			if (other.postDate != null)
+				return false;
+		} else if (!postDate.equals(other.postDate))
+			return false;
+		if (postedFrom == null) {
+			if (other.postedFrom != null)
+				return false;
+		} else if (!postedFrom.equals(other.postedFrom))
+			return false;
+		if (tweet == null) {
+			if (other.tweet != null)
+				return false;
+		} else if (!tweet.equals(other.tweet))
+			return false;
+		return true;
 	}
 
 	@Override
