@@ -1,16 +1,17 @@
 package nl.jeroenschepens.kwetter.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import nl.jeroenschepens.kwetter.domain.User;
 
 public class UserDAOCollectionImpl implements UserDAO {
 
-	private List<User> users;
+	private HashMap<String, User> users;
 
 	public UserDAOCollectionImpl() {
-		users = new ArrayList<User>();
+		users = new HashMap<String, User>();
 	}
 
 	@Override
@@ -20,7 +21,7 @@ public class UserDAOCollectionImpl implements UserDAO {
 
 	@Override
 	public void create(User user) {
-		users.add(user);
+		users.put(user.getName(), user);
 	}
 
 	@Override
@@ -30,7 +31,7 @@ public class UserDAOCollectionImpl implements UserDAO {
 
 	@Override
 	public List<User> findAll() {
-		return new ArrayList<User>(users);
+		return new ArrayList<User>(users.values());
 	}
 
 	@Override
@@ -39,7 +40,7 @@ public class UserDAOCollectionImpl implements UserDAO {
 	}
 
 	@Override
-	public User find(Long id) {
+	public User find(String username) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 }
