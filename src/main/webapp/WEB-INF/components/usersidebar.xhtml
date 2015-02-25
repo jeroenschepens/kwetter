@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition 
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets">
-    <p>Sidebar</p>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:outputText value="Name " styleClass="bold italic" />
+	<h:outputText value="#{kwetterController.selectedUser.name}"
+		styleClass="italic" />
+	<br />
+	<h:outputText value="Bio " styleClass="bold italic" />
+	<h:outputText value="#{kwetterController.selectedUser.bio}"
+		styleClass="italic" />
+	<br />
+	<h:outputText value="Web " styleClass="bold italic" />
+	<h:outputText value="#{kwetterController.selectedUser.web}"
+		styleClass="italic" />
 </ui:composition>

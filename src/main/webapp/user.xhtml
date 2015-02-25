@@ -3,12 +3,20 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
 		<div id="sidebar">
 			<ui:include src="/WEB-INF/components/usersidebar.xhtml" />
 		</div>
 		<h1>#{kwetterController.selectedUser.name}</h1>
-		<p>Welkom bij Kwetter!</p>
+		<a4j:repeat value="#{kwetterController.selectedUser.tweets}"
+			var="tweet">
+			<div class="tweet">
+				<div class="name">#{kwetterController.selectedUser.name}</div>
+				<div class="date">#{tweet.datum}</div>
+				<br /> <br /> #{tweet.tweet}
+			</div>
+		</a4j:repeat>
 	</ui:define>
 </ui:composition>
