@@ -59,6 +59,13 @@ public class KwetterService {
 		u1.addTweet(t2);
 		u1.addTweet(t3);
 
+		Tweet t4 = new Tweet("Ik ben Frank", new Date(), "Kwetter for iOS");
+		Tweet t5 = new Tweet("Ik ben Tom", new Date(), "Kwetter for Android");
+		Tweet t6 = new Tweet("Ik ben Sjaak", new Date(), "PC");
+		u2.addTweet(t4);
+		u3.addTweet(t5);
+		u4.addTweet(t6);
+
 		userDAO.create(u1);
 		userDAO.create(u2);
 		userDAO.create(u3);

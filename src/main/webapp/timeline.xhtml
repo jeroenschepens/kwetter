@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<!--  <div id="sidebar">
+			<ui:include src="/WEB-INF/components/usersidebar.xhtml" />
+		</div> -->
+		<h1>#{kwetterController.currentUser.name}</h1>
+		<a4j:repeat value="#{kwetterController.currentUser.following}"
+			var="user">
+			<a4j:repeat value="#{user.tweets}" var="tweet">
+				<div class="tweet">
+					<div class="name">#{user.name}</div>
+					<div class="date">#{tweet.datum}</div>
+					<br /> <br />#{tweet.tweet}
+				</div>
+			</a4j:repeat>
+		</a4j:repeat>
+	</ui:define>
+</ui:composition>

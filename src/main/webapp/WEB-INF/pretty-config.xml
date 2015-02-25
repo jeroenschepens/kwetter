@@ -10,4 +10,8 @@
 		<pattern value="/users/#{username}" />
 		<view-id value="/user.jsf" />
 	</url-mapping>
+	<url-mapping id="timeline">
+		<pattern value="/timeline" />
+		<view-id value="/timeline.jsf" />
+	</url-mapping>
 </pretty-config>

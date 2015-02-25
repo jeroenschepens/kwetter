@@ -1,5 +1,6 @@
 package nl.jeroenschepens.kwetter.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import nl.jeroenschepens.kwetter.domain.Tweet;
 import nl.jeroenschepens.kwetter.domain.User;
 import nl.jeroenschepens.kwetter.service.KwetterService;
 
@@ -39,6 +41,27 @@ public class KwetterController {
 		} catch (Exception ex) {
 			throw new RuntimeException();
 		}
+	}
+
+	public User getCurrentUser() {
+		// TODO Mock implementation; always returns "Hans"
+		return kwetterService.find("hans");
+	}
+
+	public List<Tweet> getAllTweets() {
+		// Get current user
+
+		User user = getCurrentUser();
+		// Instantiate new list
+
+		List<Tweet> tweets = new ArrayList<Tweet>();
+
+		// Add all tweets to a new list
+		for (User following : user.getFollowing()) {
+			tweets.addAll(following.getTweets());
+		}
+
+		return tweets;
 	}
 
 	public List<User> getAllUsers() {
