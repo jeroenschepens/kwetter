@@ -35,8 +35,8 @@ public class KwetterService {
 		return userDAO.findAll();
 	}
 
-	public User find(Object id) {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public User find(String username) {
+		return userDAO.find(username);
 	}
 
 	public int count() {
