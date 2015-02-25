@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
@@ -14,7 +14,7 @@ import nl.jeroenschepens.kwetter.domain.User;
 import nl.jeroenschepens.kwetter.service.KwetterService;
 
 @ManagedBean(name = "kwetterController")
-@ViewScoped
+@SessionScoped
 public class KwetterController {
 
 	@Inject
@@ -22,6 +22,8 @@ public class KwetterController {
 
 	@Inject
 	private FacesContext facesContext;
+
+	private boolean mention = false;
 
 	public User getSelectedUser() {
 		try {
@@ -60,7 +62,15 @@ public class KwetterController {
 		return kwetterService.getFollowersCount(getCurrentUser().getName());
 	}
 
-	public List<Tweet> getAllTweets() {
+	public List<Tweet> getTweets() {
+		if (!mention) {
+			return getFollowingTweets();
+		} else {
+			return getMentions();
+		}
+	}
+
+	private List<Tweet> getFollowingTweets() {
 		User user = getCurrentUser();
 		List<Tweet> tweets = new ArrayList<Tweet>();
 		for (User following : user.getFollowing()) {
@@ -69,7 +79,28 @@ public class KwetterController {
 		return tweets;
 	}
 
+	private List<Tweet> getMentions() {
+		String username = '@' + getCurrentUser().getName().toLowerCase();
+		List<Tweet> mentions = new ArrayList<Tweet>();
+		for (User user : getAllUsers()) {
+			for (Tweet tweet : user.getTweets()) {
+				if (tweet.getTweet().toLowerCase().contains(username)) {
+					mentions.add(tweet);
+				}
+			}
+		}
+		return mentions;
+	}
+
 	public List<User> getAllUsers() {
 		return kwetterService.findAll();
+	}
+
+	public boolean isMention() {
+		return mention;
+	}
+
+	public void switchMention() {
+		this.mention = !mention;
 	}
 }

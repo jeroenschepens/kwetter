@@ -10,15 +10,19 @@
 			<ui:include src="/WEB-INF/components/timelinesidebar.xhtml" />
 		</div>
 		<h1>#{kwetterController.currentUser.name}</h1>
-		<a4j:repeat value="#{kwetterController.currentUser.following}"
-			var="user">
-			<a4j:repeat value="#{user.tweets}" var="tweet">
+		<h:form>
+			<a4j:commandButton value="Switch"
+				action="#{kwetterController.switchMention()}" execute="@form"
+				render="switch" />
+		</h:form>
+		<a4j:outputPanel id="switch">
+			<a4j:repeat value="#{kwetterController.tweets}" var="tweet">
 				<div class="tweet">
-					<div class="name">#{user.name}</div>
+					<div class="name">TODO username</div>
 					<div class="date">#{tweet.datum}</div>
 					<br /> <br />#{tweet.tweet}
 				</div>
 			</a4j:repeat>
-		</a4j:repeat>
+		</a4j:outputPanel>
 	</ui:define>
 </ui:composition>
