@@ -3,10 +3,14 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
 		<h1>Kwetter</h1>
 		<p>Welkom bij Kwetter! Reeds #{kwetterController.count()}
 			gebruikers gingen u voor!</p>
+		<a4j:repeat value="#{kwetterController.allUsers}" var="user">
+			<p>#{user.name}</p>
+		</a4j:repeat>
 	</ui:define>
 </ui:composition>

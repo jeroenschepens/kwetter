@@ -41,6 +41,6 @@ public class UserDAOCollectionImpl implements UserDAO {
 
 	@Override
 	public User find(String username) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		return users.get(username);
 	}
 }
