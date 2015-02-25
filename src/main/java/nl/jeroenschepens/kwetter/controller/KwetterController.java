@@ -23,10 +23,6 @@ public class KwetterController {
 	@Inject
 	private FacesContext facesContext;
 
-	public int count() {
-		return kwetterService.count();
-	}
-
 	public User getSelectedUser() {
 		try {
 			Map<String, String> params = facesContext.getExternalContext()
@@ -48,19 +44,28 @@ public class KwetterController {
 		return kwetterService.find("hans");
 	}
 
+	public int getUserCount() {
+		return kwetterService.count();
+	}
+
+	public int getTweetCount() {
+		return getCurrentUser().getTweets().size();
+	}
+
+	public int getFollowingCount() {
+		return getCurrentUser().getFollowing().size();
+	}
+
+	public int getFollowersCount() {
+		return kwetterService.getFollowersCount(getCurrentUser().getName());
+	}
+
 	public List<Tweet> getAllTweets() {
-		// Get current user
-
 		User user = getCurrentUser();
-		// Instantiate new list
-
 		List<Tweet> tweets = new ArrayList<Tweet>();
-
-		// Add all tweets to a new list
 		for (User following : user.getFollowing()) {
 			tweets.addAll(following.getTweets());
 		}
-
 		return tweets;
 	}
 

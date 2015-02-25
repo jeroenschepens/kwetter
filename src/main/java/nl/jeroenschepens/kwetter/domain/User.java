@@ -95,22 +95,11 @@ public class User implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (bio == null) {
-			if (other.bio != null)
-				return false;
-		} else if (!bio.equals(other.bio))
+		if (other.getName().toLowerCase().equals(this.getName().toLowerCase())) {
+			return true;
+		} else {
 			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (web == null) {
-			if (other.web != null)
-				return false;
-		} else if (!web.equals(other.web))
-			return false;
-		return true;
+		}
 	}
 
 	@Override

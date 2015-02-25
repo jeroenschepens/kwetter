@@ -43,6 +43,17 @@ public class KwetterService {
 		return userDAO.count();
 	}
 
+	public int getFollowersCount(String username) {
+		int followers = 0;
+		User temp = new User(username);
+		for (User user : findAll()) {
+			if (user.getFollowing().contains(temp)) {
+				followers++;
+			}
+		}
+		return followers;
+	}
+
 	private void initUsers() {
 		User u1 = new User("Hans", "http", "geboren 1");
 		User u2 = new User("Frank", "httpF", "geboren 2");
@@ -51,6 +62,9 @@ public class KwetterService {
 		u1.addFollowing(u2);
 		u1.addFollowing(u3);
 		u1.addFollowing(u4);
+
+		u2.addFollowing(u1);
+		u3.addFollowing(u1);
 
 		Tweet t1 = new Tweet("Hallo", new Date(), "PC");
 		Tweet t2 = new Tweet("Hallo again", new Date(), "PC");

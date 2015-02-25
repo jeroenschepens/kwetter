@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:outputText value="Tweets " styleClass="bold italic" />
+	<h:outputText value="#{kwetterController.tweetCount}"
+		styleClass="italic" />
+	<br />
+	<h:outputText value="Following " styleClass="bold italic" />
+	<h:outputText value="#{kwetterController.followingCount}"
+		styleClass="italic" />
+	<br />
+	<h:outputText value="Followers " styleClass="bold italic" />
+	<h:outputText value="#{kwetterController.followersCount}"
+		styleClass="italic" />
+</ui:composition>
