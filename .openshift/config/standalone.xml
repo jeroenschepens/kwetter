@@ -469,6 +469,15 @@
                         </login-module>
                     </authentication>
                 </security-domain>
+                <security-domain name="kwetter" cache-type="default">
+                    <authentication>
+                        <login-module code="org.jboss.security.auth.spi.DatabaseServerLoginModule" flag="required">
+                            <module-option name="dsJndiName" value="java:jboss/datasources/MySQLDS"/>
+                            <module-option name="principalsQuery" value="select password from User username where username=?"/>
+                            <module-option name="rolesQuery" value="select role, 'Roles' from User where username=?"/>
+                        </login-module>
+                    </authentication>
+                </security-domain>
                 <security-domain name="admin" cache-type="default">
                     <authentication>
                         <login-module code="org.jboss.security.auth.spi.DatabaseServerLoginModule" flag="required">
