@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Tweet implements Serializable {
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 2953236183857132524L;
+
 	private String tweet;
-	private Date postDate;
-	private String postedFrom;
+	private String poster;
+	private Date postdate;
+	private String postedfrom;
 
 	public Tweet() {
 	}
@@ -16,10 +19,10 @@ public class Tweet implements Serializable {
 		this.tweet = tweet;
 	}
 
-	public Tweet(String tweet, Date datum, String vanaf) {
+	public Tweet(String tweet, Date postdate, String postedfrom) {
 		this.tweet = tweet;
-		this.postDate = datum;
-		this.postedFrom = vanaf;
+		this.postdate = postdate;
+		this.postedfrom = postedfrom;
 	}
 
 	public String getTweet() {
@@ -30,20 +33,28 @@ public class Tweet implements Serializable {
 		this.tweet = tweet;
 	}
 
-	public Date getDatum() {
-		return postDate;
+	public String getPoster() {
+		return poster;
 	}
 
-	public void setDatum(Date datum) {
-		this.postDate = datum;
+	public void setPoster(String poster) {
+		this.poster = poster;
 	}
 
-	public String getVanaf() {
-		return postedFrom;
+	public Date getPostdate() {
+		return postdate;
 	}
 
-	public void setVanaf(String vanaf) {
-		this.postedFrom = vanaf;
+	public void setPostdate(Date postdate) {
+		this.postdate = postdate;
+	}
+
+	public String getPostedfrom() {
+		return postedfrom;
+	}
+
+	public void setPostedfrom(String postedfrom) {
+		this.postedfrom = postedfrom;
 	}
 
 	@Override
@@ -51,9 +62,10 @@ public class Tweet implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((postDate == null) ? 0 : postDate.hashCode());
+				+ ((postdate == null) ? 0 : postdate.hashCode());
 		result = prime * result
-				+ ((postedFrom == null) ? 0 : postedFrom.hashCode());
+				+ ((postedfrom == null) ? 0 : postedfrom.hashCode());
+		result = prime * result + ((poster == null) ? 0 : poster.hashCode());
 		result = prime * result + ((tweet == null) ? 0 : tweet.hashCode());
 		return result;
 	}
@@ -67,15 +79,20 @@ public class Tweet implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Tweet other = (Tweet) obj;
-		if (postDate == null) {
-			if (other.postDate != null)
+		if (postdate == null) {
+			if (other.postdate != null)
 				return false;
-		} else if (!postDate.equals(other.postDate))
+		} else if (!postdate.equals(other.postdate))
 			return false;
-		if (postedFrom == null) {
-			if (other.postedFrom != null)
+		if (postedfrom == null) {
+			if (other.postedfrom != null)
 				return false;
-		} else if (!postedFrom.equals(other.postedFrom))
+		} else if (!postedfrom.equals(other.postedfrom))
+			return false;
+		if (poster == null) {
+			if (other.poster != null)
+				return false;
+		} else if (!poster.equals(other.poster))
 			return false;
 		if (tweet == null) {
 			if (other.tweet != null)
@@ -87,6 +104,6 @@ public class Tweet implements Serializable {
 
 	@Override
 	public String toString() {
-		return "twitter.domain.Tweet[id=" + postDate.toString() + "]";
+		return "twitter.domain.Tweet[id=" + postdate.toString() + "]";
 	}
 }

@@ -13,8 +13,8 @@
 		<a4j:repeat value="#{kwetterController.selectedUser.tweets}"
 			var="tweet">
 			<div class="tweet">
-				<div class="name">#{kwetterController.selectedUser.name}</div>
-				<div class="date">#{tweet.datum}</div>
+				<div class="name">#{tweet.poster}</div>
+				<div class="date">#{tweet.postdate}</div>
 				<br /> <br /> #{tweet.tweet}
 			</div>
 		</a4j:repeat>

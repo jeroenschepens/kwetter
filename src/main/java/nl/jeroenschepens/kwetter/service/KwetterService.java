@@ -1,26 +1,30 @@
 package nl.jeroenschepens.kwetter.service;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 import nl.jeroenschepens.kwetter.dao.UserDAO;
-import nl.jeroenschepens.kwetter.dao.UserDAOCollectionImpl;
 import nl.jeroenschepens.kwetter.domain.Tweet;
 import nl.jeroenschepens.kwetter.domain.User;
 
 @Stateless
 public class KwetterService {
 
-	private UserDAO userDAO = new UserDAOCollectionImpl();
+	@Inject
+	private UserDAO userDAO;
 
 	public KwetterService() {
-		initUsers();
 	}
 
 	public void create(User user) {
 		userDAO.create(user);
+	}
+
+	public void postTweet(Tweet tweet) {
+		userDAO.find(tweet.getPoster()).addTweet(tweet);
 	}
 
 	public void edit(User user) {
@@ -43,6 +47,36 @@ public class KwetterService {
 		return userDAO.count();
 	}
 
+	public int getTweetCount(String username) {
+		return userDAO.find(username).getTweets().size();
+	}
+
+	public int getFollowingCount(String username) {
+		return userDAO.find(username).getFollowing().size();
+	}
+
+	public List<Tweet> getNewsfeed(String username) {
+		User user = this.find(username);
+		List<Tweet> tweets = new ArrayList<Tweet>();
+		for (User following : user.getFollowing()) {
+			tweets.addAll(following.getTweets());
+		}
+		return tweets;
+	}
+
+	public List<Tweet> getMentions(String username) {
+		username = '@' + username.toLowerCase();
+		List<Tweet> mentions = new ArrayList<Tweet>();
+		for (User user : findAll()) {
+			for (Tweet tweet : user.getTweets()) {
+				if (tweet.getTweet().toLowerCase().contains(username)) {
+					mentions.add(tweet);
+				}
+			}
+		}
+		return mentions;
+	}
+
 	public int getFollowersCount(String username) {
 		int followers = 0;
 		User temp = new User(username);
@@ -52,39 +86,5 @@ public class KwetterService {
 			}
 		}
 		return followers;
-	}
-
-	private void initUsers() {
-		User u1 = new User("Hans", "http", "geboren 1");
-		User u2 = new User("Frank", "httpF", "geboren 2");
-		User u3 = new User("Tom", "httpT", "geboren 3");
-		User u4 = new User("Sjaak", "httpS", "geboren 4");
-		u1.addFollowing(u2);
-		u1.addFollowing(u3);
-		u1.addFollowing(u4);
-
-		u2.addFollowing(u1);
-		u3.addFollowing(u1);
-
-		Tweet t1 = new Tweet("Hallo", new Date(), "PC");
-		Tweet t2 = new Tweet("Hallo again", new Date(), "PC");
-		Tweet t3 = new Tweet("Hallo where are you", new Date(), "PC");
-		u1.addTweet(t1);
-		u1.addTweet(t2);
-		u1.addTweet(t3);
-
-		Tweet t4 = new Tweet("Ik ben Frank", new Date(), "Kwetter for iOS");
-		Tweet t5 = new Tweet("Ik ben Tom", new Date(), "Kwetter for Android");
-		Tweet t6 = new Tweet("Ik ben Sjaak", new Date(), "PC");
-		Tweet t7 = new Tweet("Chillen met @Hans", new Date(), "PC");
-		u2.addTweet(t4);
-		u3.addTweet(t5);
-		u4.addTweet(t6);
-		u4.addTweet(t7);
-
-		userDAO.create(u1);
-		userDAO.create(u2);
-		userDAO.create(u3);
-		userDAO.create(u4);
 	}
 }

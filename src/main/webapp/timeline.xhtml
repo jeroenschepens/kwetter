@@ -11,6 +11,13 @@
 		</div>
 		<h1>#{kwetterController.currentUser.name}</h1>
 		<h:form>
+			<h:inputTextarea value="#{kwetterController.draft.tweet}" />
+			<br />
+			<a4j:commandButton value="Post"
+				action="#{kwetterController.postDraft()}" execute="@form"
+				render="@all" />
+		</h:form>
+		<h:form>
 			<a4j:commandButton value="Switch"
 				action="#{kwetterController.switchMention()}" execute="@form"
 				render="switch" />
@@ -18,8 +25,8 @@
 		<a4j:outputPanel id="switch">
 			<a4j:repeat value="#{kwetterController.tweets}" var="tweet">
 				<div class="tweet">
-					<div class="name">TODO username</div>
-					<div class="date">#{tweet.datum}</div>
+					<div class="name">#{tweet.poster}</div>
+					<div class="date">#{tweet.postdate}</div>
 					<br /> <br />#{tweet.tweet}
 				</div>
 			</a4j:repeat>

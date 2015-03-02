@@ -1,9 +1,10 @@
 package nl.jeroenschepens.kwetter.controller;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -23,6 +24,8 @@ public class KwetterController {
 	@Inject
 	private FacesContext facesContext;
 
+	private Tweet draft;
+
 	private boolean mention = false;
 
 	public User getSelectedUser() {
@@ -41,9 +44,34 @@ public class KwetterController {
 		}
 	}
 
-	public User getCurrentUser() {
+	@PostConstruct
+	public void init() {
+		initDraft();
+	}
+
+	private void initDraft() {
+		draft = new Tweet();
+		draft.setPostedfrom("Web");
+		draft.setPoster(getUsername().toLowerCase());
+	}
+
+	public Tweet getDraft() {
+		return draft;
+	}
+
+	public void postDraft() {
+		draft.setPostdate(new Date());
+		kwetterService.postTweet(draft);
+		initDraft();
+	}
+
+	public String getUsername() {
 		// TODO Mock implementation; always returns "Hans"
-		return kwetterService.find("hans");
+		return "hans";
+	}
+
+	public User getCurrentUser() {
+		return kwetterService.find(getUsername());
 	}
 
 	public int getUserCount() {
@@ -51,45 +79,23 @@ public class KwetterController {
 	}
 
 	public int getTweetCount() {
-		return getCurrentUser().getTweets().size();
+		return kwetterService.getTweetCount(getUsername());
 	}
 
 	public int getFollowingCount() {
-		return getCurrentUser().getFollowing().size();
+		return kwetterService.getFollowingCount(getUsername());
 	}
 
 	public int getFollowersCount() {
-		return kwetterService.getFollowersCount(getCurrentUser().getName());
+		return kwetterService.getFollowersCount(getUsername());
 	}
 
 	public List<Tweet> getTweets() {
 		if (!mention) {
-			return getFollowingTweets();
+			return kwetterService.getNewsfeed(getUsername());
 		} else {
-			return getMentions();
+			return kwetterService.getMentions(getUsername());
 		}
-	}
-
-	private List<Tweet> getFollowingTweets() {
-		User user = getCurrentUser();
-		List<Tweet> tweets = new ArrayList<Tweet>();
-		for (User following : user.getFollowing()) {
-			tweets.addAll(following.getTweets());
-		}
-		return tweets;
-	}
-
-	private List<Tweet> getMentions() {
-		String username = '@' + getCurrentUser().getName().toLowerCase();
-		List<Tweet> mentions = new ArrayList<Tweet>();
-		for (User user : getAllUsers()) {
-			for (Tweet tweet : user.getTweets()) {
-				if (tweet.getTweet().toLowerCase().contains(username)) {
-					mentions.add(tweet);
-				}
-			}
-		}
-		return mentions;
 	}
 
 	public List<User> getAllUsers() {

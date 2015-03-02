@@ -73,6 +73,7 @@ public class User implements Serializable {
 	}
 
 	public Boolean addTweet(Tweet tweet) {
+		tweet.setPoster(this.name);
 		return this.tweets.add(tweet);
 	}
 
