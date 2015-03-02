@@ -3,15 +3,30 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<h:outputText value="Name " styleClass="bold italic" />
+	<h:outputText value="#{timelineController.currentUser.name}"
+		styleClass="italic" />
+	<br />
+	<h:outputText value="Web " styleClass="bold italic" />
+	<h:outputText value="#{timelineController.currentUser.web}"
+		styleClass="italic" />
+	<br />
+	<h:outputText value="Bio " styleClass="bold italic" />
+	<h:outputText value="#{timelineController.currentUser.bio}"
+		styleClass="italic" />
+	<br />
+	<br />
 	<h:outputText value="Tweets " styleClass="bold italic" />
-	<h:outputText value="#{kwetterController.tweetCount}"
+	<h:outputText value="#{timelineController.tweetCount}"
 		styleClass="italic" />
 	<br />
 	<h:outputText value="Following " styleClass="bold italic" />
-	<h:outputText value="#{kwetterController.followingCount}"
+	<h:outputText value="#{timelineController.followingCount}"
 		styleClass="italic" />
 	<br />
 	<h:outputText value="Followers " styleClass="bold italic" />
-	<h:outputText value="#{kwetterController.followersCount}"
+	<h:outputText value="#{timelineController.followersCount}"
 		styleClass="italic" />
+
 </ui:composition>

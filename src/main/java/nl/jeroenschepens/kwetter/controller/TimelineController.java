@@ -2,11 +2,10 @@ package nl.jeroenschepens.kwetter.controller;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
@@ -14,9 +13,9 @@ import nl.jeroenschepens.kwetter.domain.Tweet;
 import nl.jeroenschepens.kwetter.domain.User;
 import nl.jeroenschepens.kwetter.service.KwetterService;
 
-@ManagedBean(name = "kwetterController")
-@SessionScoped
-public class KwetterController {
+@ManagedBean(name = "timelineController")
+@ViewScoped
+public class TimelineController {
 
 	@Inject
 	private KwetterService kwetterService;
@@ -27,22 +26,6 @@ public class KwetterController {
 	private Tweet draft;
 
 	private boolean mention = false;
-
-	public User getSelectedUser() {
-		try {
-			Map<String, String> params = facesContext.getExternalContext()
-					.getRequestParameterMap();
-			String username = params.get("username");
-			User user = kwetterService.find(username);
-			if (user != null) {
-				return user;
-			} else {
-				throw new RuntimeException();
-			}
-		} catch (Exception ex) {
-			throw new RuntimeException();
-		}
-	}
 
 	@PostConstruct
 	public void init() {
@@ -66,8 +49,7 @@ public class KwetterController {
 	}
 
 	public String getUsername() {
-		// TODO Mock implementation; always returns "Hans"
-		return "hans";
+		return facesContext.getExternalContext().getUserPrincipal().getName();
 	}
 
 	public User getCurrentUser() {
@@ -96,10 +78,6 @@ public class KwetterController {
 		} else {
 			return kwetterService.getMentions(getUsername());
 		}
-	}
-
-	public List<User> getAllUsers() {
-		return kwetterService.findAll();
 	}
 
 	public boolean isMention() {

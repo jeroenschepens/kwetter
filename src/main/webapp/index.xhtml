@@ -7,9 +7,9 @@
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
 		<h1>Kwetter</h1>
-		<p>Welkom bij Kwetter! Reeds #{kwetterController.userCount}
+		<p>Welkom bij Kwetter! Reeds #{homeController.userCount}
 			gebruikers gingen u voor!</p>
-		<a4j:repeat value="#{kwetterController.allUsers}" var="user">
+		<a4j:repeat value="#{homeController.allUsers}" var="user">
 			<p>#{user.name}</p>
 		</a4j:repeat>
 	</ui:define>

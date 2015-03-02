@@ -15,4 +15,32 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
+	<!-- Security constraint -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Kwetter</web-resource-name>
+			<url-pattern>/timeline</url-pattern>
+			<url-pattern>/timeline.jsf</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>user</role-name>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<security-role>
+		<role-name>user</role-name>
+	</security-role>
+
+	<security-role>
+		<role-name>admin</role-name>
+	</security-role>
+
+	<login-config>
+		<auth-method>BASIC</auth-method>
+		<realm-name>Kwetter</realm-name>
+	</login-config>
+
 </web-app>
