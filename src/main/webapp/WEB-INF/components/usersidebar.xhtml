@@ -5,7 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<h:outputText value="Name " styleClass="bold italic" />
-	<h:outputText value="#{timelineController.currentUser.name}"
+	<h:outputText value="#{profileController.selectedUser.name}"
 		styleClass="italic" />
 	<br />
 	<h:outputText value="Web " styleClass="bold italic" />
@@ -13,7 +13,7 @@
 		styleClass="italic" />
 	<br />
 	<h:outputText value="Bio " styleClass="bold italic" />
-	<h:outputText value="#{timelineController.currentUser.bio}"
+	<h:outputText value="#{profileController.selectedUser.bio}"
 		styleClass="italic" />
 	<br />
 	<br />
@@ -28,5 +28,5 @@
 	<h:outputText value="Followers " styleClass="bold italic" />
 	<h:outputText value="#{profileController.followersCount}"
 		styleClass="italic" />
-		
+
 </ui:composition>
