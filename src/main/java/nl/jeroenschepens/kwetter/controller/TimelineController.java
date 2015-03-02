@@ -23,9 +23,13 @@ public class TimelineController {
 	@Inject
 	private FacesContext facesContext;
 
+	private String searchTerm;
+
 	private Tweet draft;
 
 	private boolean mention = false;
+
+	private boolean search = false;
 
 	@PostConstruct
 	public void init() {
@@ -40,6 +44,14 @@ public class TimelineController {
 
 	public Tweet getDraft() {
 		return draft;
+	}
+
+	public String getSearchTerm() {
+		return searchTerm;
+	}
+
+	public void setSearchTerm(String searchTerm) {
+		this.searchTerm = searchTerm;
 	}
 
 	public void postDraft() {
@@ -73,10 +85,12 @@ public class TimelineController {
 	}
 
 	public List<Tweet> getTweets() {
-		if (!mention) {
-			return kwetterService.getNewsfeed(getUsername());
-		} else {
+		if (mention) {
 			return kwetterService.getMentions(getUsername());
+		} else if (search) {
+			return kwetterService.searchTweets(searchTerm);
+		} else {
+			return kwetterService.getNewsfeed(getUsername());
 		}
 	}
 
@@ -84,7 +98,18 @@ public class TimelineController {
 		return mention;
 	}
 
-	public void switchMention() {
-		this.mention = !mention;
+	public void switchToNewsFeed() {
+		this.search = false;
+		this.mention = false;
+	}
+
+	public void switchToMentions() {
+		this.search = false;
+		this.mention = true;
+	}
+
+	public void switchToSearch() {
+		this.mention = false;
+		this.search = true;
 	}
 }

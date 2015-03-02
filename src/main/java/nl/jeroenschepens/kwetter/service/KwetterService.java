@@ -87,4 +87,17 @@ public class KwetterService {
 		}
 		return followers;
 	}
+
+	public List<Tweet> searchTweets(String text) {
+		text = text.toLowerCase();
+		List<Tweet> results = new ArrayList<Tweet>();
+		for (User user : findAll()) {
+			for (Tweet tweet : user.getTweets()) {
+				if (tweet.getTweet().toLowerCase().contains(text)) {
+					results.add(tweet);
+				}
+			}
+		}
+		return results;
+	}
 }

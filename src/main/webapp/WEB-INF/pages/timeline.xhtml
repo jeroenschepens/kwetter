@@ -11,6 +11,13 @@
 		</div>
 		<h1>#{timelineController.currentUser.name}</h1>
 		<h:form>
+			<h:inputTextarea value="#{timelineController.searchTerm}" />
+			<br />
+			<a4j:commandButton value="Search"
+				action="#{timelineController.switchToSearch()}" execute="@form"
+				render="tweets" />
+		</h:form>
+		<h:form>
 			<h:inputTextarea value="#{timelineController.draft.tweet}" />
 			<br />
 			<a4j:commandButton value="Post"
@@ -18,11 +25,14 @@
 				render="@all" />
 		</h:form>
 		<h:form>
-			<a4j:commandButton value="Switch"
-				action="#{timelineController.switchMention()}" execute="@form"
-				render="switch" />
+			<a4j:commandButton value="Newsfeed"
+				action="#{timelineController.switchToNewsFeed()}" execute="@form"
+				render="tweets" />
+			<a4j:commandButton value="Mentions"
+				action="#{timelineController.switchToMentions()}" execute="@form"
+				render="tweets" />
 		</h:form>
-		<a4j:outputPanel id="switch">
+		<a4j:outputPanel id="tweets">
 			<a4j:repeat value="#{timelineController.tweets}" var="tweet">
 				<div class="tweet">
 					<div class="name">#{tweet.poster}</div>
