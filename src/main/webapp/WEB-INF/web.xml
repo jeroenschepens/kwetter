@@ -5,7 +5,7 @@
 
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>*.jsf</url-pattern>
+		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 
 	<!-- JSF mapping -->
@@ -17,7 +17,7 @@
 
 	<error-page>
 		<exception-type>java.lang.Exception</exception-type>
-		<location>/WEB-INF/pages/error.jsf</location>
+		<location>/WEB-INF/pages/error.xhtml</location>
 	</error-page>
 
 	<!-- Security constraint -->
