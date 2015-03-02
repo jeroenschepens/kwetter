@@ -26,7 +26,12 @@ public class ProfileController {
 	public String getUsername() {
 		Map<String, String> params = facesContext.getExternalContext()
 				.getRequestParameterMap();
-		return params.get("username");
+		String username = params.get("username");
+		if (username != null) {
+			return username;
+		} else {
+			throw new NullPointerException("User does not exist!");
+		}
 	}
 
 	public User getSelectedUser() {

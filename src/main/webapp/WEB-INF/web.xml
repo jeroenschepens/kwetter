@@ -15,6 +15,11 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/WEB-INF/pages/error.jsf</location>
+	</error-page>
+
 	<!-- Security constraint -->
 	<security-constraint>
 		<web-resource-collection>
