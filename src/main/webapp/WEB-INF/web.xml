@@ -25,7 +25,6 @@
 		<web-resource-collection>
 			<web-resource-name>Kwetter</web-resource-name>
 			<url-pattern>/timeline</url-pattern>
-			<url-pattern>/timeline.jsf</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
 		</web-resource-collection>
