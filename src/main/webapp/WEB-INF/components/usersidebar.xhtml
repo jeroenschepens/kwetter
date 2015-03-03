@@ -3,30 +3,20 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-
-	<h:outputText value="Name " styleClass="bold italic" />
-	<h:outputText value="#{profileController.selectedUser.name}"
-		styleClass="italic" />
-	<br />
-	<h:outputText value="Web " styleClass="bold italic" />
-	<h:outputText value="#{profileController.selectedUser.web}"
-		styleClass="italic" />
-	<br />
-	<h:outputText value="Bio " styleClass="bold italic" />
-	<h:outputText value="#{profileController.selectedUser.bio}"
-		styleClass="italic" />
-	<br />
-	<br />
-	<h:outputText value="Tweets " styleClass="bold italic" />
-	<h:outputText value="#{profileController.tweetCount}"
-		styleClass="italic" />
-	<br />
-	<h:outputText value="Following " styleClass="bold italic" />
-	<h:outputText value="#{profileController.followingCount}"
-		styleClass="italic" />
-	<br />
-	<h:outputText value="Followers " styleClass="bold italic" />
-	<h:outputText value="#{profileController.followersCount}"
-		styleClass="italic" />
-
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">#{profileController.selectedUser.name}</h3>
+		</div>
+		<div class="panel-body">
+			<h:outputText value="#{profileController.selectedUser.name}" />
+			<br />
+			<h:outputText value="#{profileController.selectedUser.bio}" />
+			<br />
+			<h:outputText value="Tweets: #{profileController.tweetCount}" />
+			<br />
+			<h:outputText value="Following #{profileController.followingCount}" />
+			<br />
+			<h:outputText value="Followers #{timelineController.followersCount}" />
+		</div>
+	</div>
 </ui:composition>

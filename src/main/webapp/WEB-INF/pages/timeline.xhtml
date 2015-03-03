@@ -6,40 +6,49 @@
 	xmlns:a4j="http://richfaces.org/a4j"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
-		<div id="sidebar">
+		<div class="col-sm-8">
+			<h:form>
+				<div class="form-group">
+					<h:inputTextarea value="#{timelineController.draft.tweet}"
+						styleClass="form-control" />
+					<a4j:commandButton value="Post" styleClass="btn btn-default"
+						action="#{timelineController.postDraft()}" execute="@form"
+						render="@all" />
+				</div>
+			</h:form>
+			<h:form>
+				<p>
+					<a4j:commandButton value="Newsfeed" styleClass="btn btn-default"
+						action="#{timelineController.switchToNewsFeed()}" execute="@form"
+						render="tweets" />
+					<a4j:commandButton value="Mentions" styleClass="btn btn-default"
+						action="#{timelineController.switchToMentions()}" execute="@form"
+						render="tweets" />
+				</p>
+			</h:form>
+			<a4j:outputPanel id="tweets">
+				<a4j:repeat value="#{timelineController.tweets}" var="tweet">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">#{tweet.poster}</h3>
+						</div>
+						<div class="panel-body">#{tweet.tweet}</div>
+					</div>
+				</a4j:repeat>
+			</a4j:outputPanel>
+		</div>
+		<div class="col-sm-4">
+			<h:form>
+				<div class="form-group">
+					<h:inputText value="#{timelineController.searchTerm}"
+						styleClass="form-control" />
+					<a4j:commandButton value="Search"
+						styleClass="btn btn-default form-control"
+						action="#{timelineController.switchToSearch()}" execute="@form"
+						render="tweets" />
+				</div>
+			</h:form>
 			<ui:include src="/WEB-INF/components/timelinesidebar.xhtml" />
 		</div>
-		<h1>#{timelineController.currentUser.name}</h1>
-		<h:form>
-			<h:inputTextarea value="#{timelineController.searchTerm}" />
-			<br />
-			<a4j:commandButton value="Search"
-				action="#{timelineController.switchToSearch()}" execute="@form"
-				render="tweets" />
-		</h:form>
-		<h:form>
-			<h:inputTextarea value="#{timelineController.draft.tweet}" />
-			<br />
-			<a4j:commandButton value="Post"
-				action="#{timelineController.postDraft()}" execute="@form"
-				render="@all" />
-		</h:form>
-		<h:form>
-			<a4j:commandButton value="Newsfeed"
-				action="#{timelineController.switchToNewsFeed()}" execute="@form"
-				render="tweets" />
-			<a4j:commandButton value="Mentions"
-				action="#{timelineController.switchToMentions()}" execute="@form"
-				render="tweets" />
-		</h:form>
-		<a4j:outputPanel id="tweets">
-			<a4j:repeat value="#{timelineController.tweets}" var="tweet">
-				<div class="tweet">
-					<div class="name">#{tweet.poster}</div>
-					<div class="date">#{tweet.postdate}</div>
-					<br /> <br />#{tweet.tweet}
-				</div>
-			</a4j:repeat>
-		</a4j:outputPanel>
 	</ui:define>
 </ui:composition>

@@ -6,21 +6,17 @@
 <h:head>
 	<title>Kwetter</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<h:outputStylesheet name="css/kwetter.css" />
+	<h:outputStylesheet name="css/bootstrap.min.css" />
+	<h:outputStylesheet name="css/bootstrap-theme.min.css" />
 </h:head>
 <h:body>
-	<div id="container">
-		<div id="content">
-			<ui:insert name="content">
-                    [Template content will be inserted here]
-                </ui:insert>
-		</div>
-		<div id="footer">
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Kwetter</h1>
+			<p>It's Twitter, but better!</p>
 			<h:graphicImage value="/resources/gfx/logo.png" alt="Weld logo" />
-			<p>
-				This project was generated from a Maven archetype from JBoss.<br />
-			</p>
 		</div>
+		<ui:insert name="content" />
 	</div>
 </h:body>
 </html>

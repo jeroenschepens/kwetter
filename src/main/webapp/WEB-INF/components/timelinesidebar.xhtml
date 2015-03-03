@@ -4,38 +4,31 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-
-	<h:outputText value="Name " styleClass="bold italic" />
-	<h:outputText value="#{timelineController.currentUser.name}"
-		styleClass="italic" />
-	<br />
-	<h:outputText value="Web " styleClass="bold italic" />
-	<h:outputText value="#{timelineController.currentUser.web}"
-		styleClass="italic" />
-	<br />
-	<h:outputText value="Bio " styleClass="bold italic" />
-	<h:outputText value="#{timelineController.currentUser.bio}"
-		styleClass="italic" />
-	<br />
-	<br />
-	<h:outputText value="Tweets " styleClass="bold italic" />
-	<h:outputText value="#{timelineController.tweetCount}"
-		styleClass="italic" />
-	<br />
-	<h:outputText value="Following " styleClass="bold italic" />
-	<h:outputText value="#{timelineController.followingCount}"
-		styleClass="italic" />
-	<br />
-	<h:outputText value="Followers " styleClass="bold italic" />
-	<h:outputText value="#{timelineController.followersCount}"
-		styleClass="italic" />
-	<br />
-	<br />
-
-	<h:outputText value="Trending topics" styleClass="bold" />
-	<a4j:repeat value="#{timelineController.trends}" var="trend">
-		<br />
-		<h:outputText value="#{trend.key}" />
-	</a4j:repeat>
-
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">#{timelineController.currentUser.name}</h3>
+		</div>
+		<div class="panel-body">
+			<h:outputText value="#{timelineController.currentUser.web}" />
+			<br />
+			<h:outputText value="#{timelineController.currentUser.bio}" />
+			<br />
+			<h:outputText value="Tweets: #{timelineController.tweetCount}" />
+			<br />
+			<h:outputText value="Following #{timelineController.followingCount}" />
+			<br />
+			<h:outputText value="Followers #{timelineController.followersCount}" />
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Trending topics</h3>
+		</div>
+		<div class="panel-body">
+			<a4j:repeat value="#{timelineController.trends}" var="trend">
+				<h:outputText value="#{trend.key}" />
+				<br />
+			</a4j:repeat>
+		</div>
+	</div>
 </ui:composition>
