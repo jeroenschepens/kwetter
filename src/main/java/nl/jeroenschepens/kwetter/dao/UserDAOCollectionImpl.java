@@ -63,15 +63,18 @@ public class UserDAOCollectionImpl implements UserDAO {
 		u3.addFollowing(u1);
 
 		Tweet t1 = new Tweet("Hallo", new Date(), "PC");
-		Tweet t2 = new Tweet("Hallo again", new Date(), "PC");
-		Tweet t3 = new Tweet("Hallo where are you", new Date(), "PC");
+		Tweet t2 = new Tweet("#Hallo again", new Date(), "PC");
+		Tweet t3 = new Tweet("#Hallo where are you", new Date(), "PC");
 		u1.addTweet(t1);
 		u1.addTweet(t2);
 		u1.addTweet(t3);
 
-		Tweet t4 = new Tweet("Ik ben Frank", new Date(), "Kwetter for iOS");
-		Tweet t5 = new Tweet("Ik ben Tom", new Date(), "Kwetter for Android");
-		Tweet t6 = new Tweet("Ik ben Sjaak", new Date(), "PC");
+		Tweet t4 = new Tweet(
+				"Ik #ben #Frank #hamer #zaag #boor #machine #spijker #schroef",
+				new Date(), "Kwetter for iOS");
+		Tweet t5 = new Tweet("Ik #ben #Tom #Tom", new Date(),
+				"Kwetter for Android");
+		Tweet t6 = new Tweet("Ik #ben #Sjaak", new Date(), "PC");
 		Tweet t7 = new Tweet("Chillen met @Hans", new Date(), "PC");
 		u2.addTweet(t4);
 		u3.addTweet(t5);

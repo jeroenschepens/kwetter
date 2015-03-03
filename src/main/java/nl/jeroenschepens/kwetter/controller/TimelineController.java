@@ -2,6 +2,7 @@ package nl.jeroenschepens.kwetter.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -12,6 +13,7 @@ import javax.inject.Inject;
 import nl.jeroenschepens.kwetter.domain.Tweet;
 import nl.jeroenschepens.kwetter.domain.User;
 import nl.jeroenschepens.kwetter.service.KwetterService;
+import nl.jeroenschepens.kwetter.service.TrendWatcher;
 
 @ManagedBean(name = "timelineController")
 @ViewScoped
@@ -19,6 +21,9 @@ public class TimelineController {
 
 	@Inject
 	private KwetterService kwetterService;
+
+	@Inject
+	private TrendWatcher trendWatcher;
 
 	@Inject
 	private FacesContext facesContext;
@@ -92,6 +97,10 @@ public class TimelineController {
 		} else {
 			return kwetterService.getNewsfeed(getUsername());
 		}
+	}
+
+	public List<Entry<String, Integer>> getTrends() {
+		return trendWatcher.getTrends();
 	}
 
 	public boolean isMention() {

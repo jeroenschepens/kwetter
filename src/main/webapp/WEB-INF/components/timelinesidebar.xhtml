@@ -2,8 +2,9 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	
+
 	<h:outputText value="Name " styleClass="bold italic" />
 	<h:outputText value="#{timelineController.currentUser.name}"
 		styleClass="italic" />
@@ -28,5 +29,13 @@
 	<h:outputText value="Followers " styleClass="bold italic" />
 	<h:outputText value="#{timelineController.followersCount}"
 		styleClass="italic" />
+	<br />
+	<br />
+
+	<h:outputText value="Trending topics" styleClass="bold" />
+	<a4j:repeat value="#{timelineController.trends}" var="trend">
+		<br />
+		<h:outputText value="#{trend.key}" />
+	</a4j:repeat>
 
 </ui:composition>
