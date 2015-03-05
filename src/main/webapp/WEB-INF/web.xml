@@ -48,8 +48,12 @@
 	</security-role>
 
 	<login-config>
-		<auth-method>BASIC</auth-method>
+		<auth-method>FORM</auth-method>
 		<realm-name>Kwetter</realm-name>
+		<form-login-config>
+			<form-login-page>/WEB-INF/pages/login.xhtml</form-login-page>
+			<form-error-page>/WEB-INF/pages/loginfailure.xhtml</form-error-page>
+		</form-login-config>
 	</login-config>
 
 </web-app>
