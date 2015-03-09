@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.enterprise.event.Observes;
 import javax.inject.Singleton;
 
 import nl.jeroenschepens.kwetter.domain.Tweet;
@@ -85,5 +86,10 @@ public class UserDAOCollectionImpl implements UserDAO {
 		this.create(u2);
 		this.create(u3);
 		this.create(u4);
+	}
+
+	public void test(@Observes Tweet tweet) {
+		// Mock
+		System.out.println("Persist " + tweet.getTweet());
 	}
 }

@@ -4,14 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
 import nl.jeroenschepens.kwetter.dao.UserDAO;
 import nl.jeroenschepens.kwetter.domain.Tweet;
 import nl.jeroenschepens.kwetter.domain.User;
+import nl.jeroenschepens.kwetter.interceptor.Trend;
 
 @Stateless
 public class KwetterService {
+
+	@Inject
+	Event<Tweet> tweetEvent;
 
 	@Inject
 	private UserDAO userDAO;
@@ -23,8 +28,10 @@ public class KwetterService {
 		userDAO.create(user);
 	}
 
+	@Trend
 	public void postTweet(Tweet tweet) {
 		userDAO.find(tweet.getPoster()).addTweet(tweet);
+		tweetEvent.fire(tweet);
 	}
 
 	public void edit(User user) {
