@@ -1,0 +1,10 @@
+.top {
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+.bottom {
+	border-top-width: 0px;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
