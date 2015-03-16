@@ -17,9 +17,9 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
-import nl.jeroenschepens.kwetter.dao.UserDAO;
+import nl.jeroenschepens.kwetter.dao.JPA;
+import nl.jeroenschepens.kwetter.dao.TweetDAO;
 import nl.jeroenschepens.kwetter.domain.Tweet;
-import nl.jeroenschepens.kwetter.domain.User;
 
 @Singleton
 @Startup
@@ -29,8 +29,9 @@ public class TrendWatcher {
 
 	private Comparator<Entry<String, Integer>> valueComparator;
 
+	@JPA
 	@Inject
-	private UserDAO userDAO;
+	private TweetDAO tweetDAO;
 
 	private Pattern pattern;
 
@@ -58,18 +59,16 @@ public class TrendWatcher {
 	private void computeTrends() {
 		trends.clear();
 		HashMap<String, Integer> temp = new HashMap<String, Integer>();
-		for (User user : userDAO.findAll()) {
-			for (Tweet tweet : user.getTweets()) {
-				Set<String> set = new HashSet<String>();
-				Matcher m = pattern.matcher(tweet.getTweet());
-				while (m.find()) {
-					String hashtag = m.group(1);
-					if (!set.contains(hashtag)) {
-						int count = temp.containsKey(hashtag) ? temp
-								.get(hashtag) : 0;
-						temp.put(hashtag, count + 1);
-						set.add(hashtag);
-					}
+		for (Tweet tweet : tweetDAO.findAll()) {
+			Set<String> set = new HashSet<String>();
+			Matcher m = pattern.matcher(tweet.getTweet());
+			while (m.find()) {
+				String hashtag = m.group(1);
+				if (!set.contains(hashtag)) {
+					int count = temp.containsKey(hashtag) ? temp.get(hashtag)
+							: 0;
+					temp.put(hashtag, count + 1);
+					set.add(hashtag);
 				}
 			}
 		}

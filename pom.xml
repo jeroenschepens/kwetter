@@ -85,6 +85,14 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- Import the Batch API, we use provided scope as the API is included 
+			in WildFly 8 -->
+		<dependency>
+			<groupId>org.jboss.spec.javax.batch</groupId>
+			<artifactId>jboss-batch-api_1.0_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- JSR-303 (Bean Validation) Implementation -->
 		<!-- Provides portable constraints such as @Email -->
 		<!-- Hibernate Validator is shipped in WildFly 8 -->

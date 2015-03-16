@@ -3,13 +3,39 @@ package nl.jeroenschepens.kwetter.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@Entity
+@XmlRootElement
 public class Tweet implements Serializable {
 
 	private static final long serialVersionUID = 2953236183857132524L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
+	@NotNull
+	@Size(min = 1, max = 140)
 	private String tweet;
+	
+	@NotNull
+	@Size(min = 1, max = 32)
 	private String poster;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date postdate;
+	
+	@NotNull
+	@Size(min = 1, max = 32)
 	private String postedfrom;
 
 	public Tweet() {
@@ -23,6 +49,14 @@ public class Tweet implements Serializable {
 		this.tweet = tweet;
 		this.postdate = postdate;
 		this.postedfrom = postedfrom;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getTweet() {

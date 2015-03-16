@@ -14,6 +14,7 @@ import nl.jeroenschepens.kwetter.domain.Tweet;
 import nl.jeroenschepens.kwetter.domain.User;
 import nl.jeroenschepens.kwetter.service.KwetterService;
 import nl.jeroenschepens.kwetter.service.TrendWatcher;
+import nl.jeroenschepens.kwetter.util.Cache;
 
 @ManagedBean(name = "timelineController")
 @ViewScoped
@@ -35,6 +36,27 @@ public class TimelineController {
 	private boolean mention = false;
 
 	private boolean search = false;
+
+	private Cache<User> user = new Cache<User>() {
+		@Override
+		protected User storeValue() {
+			return kwetterService.findUser(getUsername());
+		}
+	};
+
+	private Cache<List<Tweet>> news = new Cache<List<Tweet>>() {
+		@Override
+		protected List<Tweet> storeValue() {
+			return kwetterService.findNews(getUsername());
+		}
+	};
+
+	private Cache<List<Tweet>> mentions = new Cache<List<Tweet>>() {
+		@Override
+		protected List<Tweet> storeValue() {
+			return kwetterService.findMentions(getUsername());
+		}
+	};
 
 	@PostConstruct
 	public void init() {
@@ -70,32 +92,28 @@ public class TimelineController {
 	}
 
 	public User getCurrentUser() {
-		return kwetterService.find(getUsername());
-	}
-
-	public int getUserCount() {
-		return kwetterService.count();
+		return user.getValue();
 	}
 
 	public int getTweetCount() {
-		return kwetterService.getTweetCount(getUsername());
+		return kwetterService.countTweets(getUsername());
 	}
 
 	public int getFollowingCount() {
-		return kwetterService.getFollowingCount(getUsername());
+		return kwetterService.countFollowing(getUsername());
 	}
 
 	public int getFollowersCount() {
-		return kwetterService.getFollowersCount(getUsername());
+		return kwetterService.countFollowers(getUsername());
 	}
 
 	public List<Tweet> getTweets() {
 		if (mention) {
-			return kwetterService.getMentions(getUsername());
+			return mentions.getValue();
 		} else if (search) {
 			return kwetterService.searchTweets(searchTerm);
 		} else {
-			return kwetterService.getNewsfeed(getUsername());
+			return news.getValue();
 		}
 	}
 

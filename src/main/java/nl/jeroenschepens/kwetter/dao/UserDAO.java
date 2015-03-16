@@ -1,19 +1,24 @@
 package nl.jeroenschepens.kwetter.dao;
 
-import nl.jeroenschepens.kwetter.domain.User;
 import java.util.List;
+
+import nl.jeroenschepens.kwetter.domain.User;
 
 public interface UserDAO {
 
-	int count();
+	User findUser(String username);
 
-	void create(User user);
+	void createUser(User user);
 
-	void edit(User user);
+	void editUser(User user);
 
-	List<User> findAll();
+	void removeUser(User user);
 
-	User find(String username);
+	List<User> findAllUsers();
 
-	void remove(User user);
+	List<String> findAllFollowing(String username);
+
+	int countFollowers(String username);
+
+	int countFollowing(String username);
 }

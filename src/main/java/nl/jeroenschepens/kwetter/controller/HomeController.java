@@ -17,10 +17,6 @@ public class HomeController {
 	private KwetterService kwetterService;
 
 	public List<User> getAllUsers() {
-		return kwetterService.findAll();
-	}
-
-	public int getUserCount() {
-		return kwetterService.count();
+		return kwetterService.findAllUsers();
 	}
 }

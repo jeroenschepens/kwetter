@@ -1,6 +1,5 @@
 package nl.jeroenschepens.kwetter.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,26 +34,22 @@ public class ProfileController {
 	}
 
 	public User getSelectedUser() {
-		return kwetterService.find(getUsername());
-	}
-
-	public int getUserCount() {
-		return kwetterService.count();
+		return kwetterService.findUser(getUsername());
 	}
 
 	public int getTweetCount() {
-		return kwetterService.getTweetCount(getUsername());
+		return kwetterService.countTweets(getUsername());
 	}
 
 	public int getFollowingCount() {
-		return kwetterService.getFollowingCount(getUsername());
+		return kwetterService.countFollowing(getUsername());
 	}
 
 	public int getFollowersCount() {
-		return kwetterService.getFollowersCount(getUsername());
+		return kwetterService.countFollowers(getUsername());
 	}
 
 	public List<Tweet> getTweets() {
-		return new ArrayList<Tweet>(getSelectedUser().getTweets());
+		return kwetterService.findTweetsByUser(getUsername());
 	}
 }

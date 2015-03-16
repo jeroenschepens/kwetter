@@ -1,19 +1,38 @@
 package nl.jeroenschepens.kwetter.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@Entity
+@XmlRootElement
 public class User implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@Size(min = 1, max = 32)
 	private String name;
+
+	@NotNull
+	@Size(min = 1, max = 32)
+	private String password;
+
+	@NotNull
+	@Size(min = 1, max = 32)
 	private String web;
+
+	@NotNull
+	@Size(min = 1, max = 255)
 	private String bio;
 
-	private Collection<User> following = new ArrayList<User>();
-	private Collection<Tweet> tweets = new ArrayList<Tweet>();
+	@NotNull
+	@Size(min = 1, max = 32)
+	private String role;
 
 	public User() {
 	}
@@ -28,20 +47,20 @@ public class User implements Serializable {
 		this.bio = bio;
 	}
 
-	public String getBio() {
-		return bio;
-	}
-
-	public void setBio(String bio) {
-		this.bio = bio;
-	}
-
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getWeb() {
@@ -52,29 +71,20 @@ public class User implements Serializable {
 		this.web = web;
 	}
 
-	public Collection<User> getFollowing() {
-		return Collections.unmodifiableCollection(following);
+	public String getBio() {
+		return bio;
 	}
 
-	public void setFollowing(Collection<User> following) {
-		this.following = following;
+	public void setBio(String bio) {
+		this.bio = bio;
 	}
 
-	public Collection<Tweet> getTweets() {
-		return Collections.unmodifiableCollection(tweets);
+	public String getRole() {
+		return role;
 	}
 
-	public void setTweets(Collection<Tweet> tweets) {
-		this.tweets = tweets;
-	}
-
-	public Boolean addFollowing(User following) {
-		return this.following.add(following);
-	}
-
-	public Boolean addTweet(Tweet tweet) {
-		tweet.setPoster(this.name);
-		return this.tweets.add(tweet);
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	@Override
