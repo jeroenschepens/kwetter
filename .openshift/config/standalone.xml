@@ -473,8 +473,8 @@
                     <authentication>
                         <login-module code="org.jboss.security.auth.spi.DatabaseServerLoginModule" flag="required">
                             <module-option name="dsJndiName" value="java:jboss/datasources/MySQLDS"/>
-                            <module-option name="principalsQuery" value="select password from User username where username=?"/>
-                            <module-option name="rolesQuery" value="select role, 'Roles' from User where username=?"/>
+                            <module-option name="principalsQuery" value="select password from User name where name=?"/>
+                            <module-option name="rolesQuery" value="select role, 'Roles' from User where name=?"/>
                         </login-module>
                     </authentication>
                 </security-domain>
@@ -482,8 +482,8 @@
                     <authentication>
                         <login-module code="org.jboss.security.auth.spi.DatabaseServerLoginModule" flag="required">
                             <module-option name="dsJndiName" value="java:jboss/datasources/MySQLDS"/>
-                            <module-option name="principalsQuery" value="select password from Admin username where username=?"/>
-                            <module-option name="rolesQuery" value="select role, 'Roles' from Admin where username=?"/>
+                            <module-option name="principalsQuery" value="select password from Admin name where name=?"/>
+                            <module-option name="rolesQuery" value="select role, 'Roles' from Admin where name=?"/>
                         </login-module>
                     </authentication>
                 </security-domain>
