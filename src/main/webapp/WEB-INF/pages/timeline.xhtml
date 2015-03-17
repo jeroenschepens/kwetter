@@ -41,9 +41,9 @@
 			<h:form>
 				<div class="form-group">
 					<h:inputText value="#{timelineController.searchTerm}"
-						styleClass="form-control" />
+						styleClass="form-control top" />
 					<a4j:commandButton value="Search"
-						styleClass="btn btn-default form-control"
+						styleClass="btn btn-default form-control bottom"
 						action="#{timelineController.switchToSearch()}" execute="@form"
 						render="tweets" />
 				</div>
