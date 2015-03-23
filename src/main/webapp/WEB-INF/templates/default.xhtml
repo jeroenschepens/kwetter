@@ -7,15 +7,22 @@
 	<title>Kwetter</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<h:outputStylesheet name="css/bootstrap.min.css" />
-	<h:outputStylesheet name="css/bootstrap-theme.min.css" />
 	<h:outputStylesheet name="css/kwetter.css" />
 </h:head>
 <h:body>
 	<div class="container">
-		<div class="jumbotron">
-			<h1>Kwetter</h1>
-			<p>It's Twitter, but better!</p>
-			<h:graphicImage value="/resources/gfx/logo.png" alt="Weld logo" />
+		<div class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Kwetter</a>
+				</div>
+				<div>
+					<ul class="nav navbar-nav">
+						<li><a href="/">Home</a></li>
+						<li><a href="/timeline">Timeline</a></li>
+					</ul>
+				</div>
+			</div>
 		</div>
 		<ui:insert name="content" />
 	</div>

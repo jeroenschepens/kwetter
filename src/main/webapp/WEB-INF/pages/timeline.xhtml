@@ -10,25 +10,26 @@
 			<h:form>
 				<div class="form-group">
 					<h:inputTextarea value="#{timelineController.draft.tweet}"
-						styleClass="form-control" />
-					<a4j:commandButton value="Post" styleClass="btn btn-default"
+						styleClass="form-control right-top" />
+					<a4j:commandButton value="Post"
+						styleClass="btn btn-primary pull-right bottom"
 						action="#{timelineController.postDraft()}" execute="@form"
 						render="@all" />
 				</div>
 			</h:form>
 			<h:form>
-				<p>
-					<a4j:commandButton value="Newsfeed" styleClass="btn btn-default"
+				<div class="btn-group">
+					<a4j:commandButton value="Newsfeed" styleClass="btn btn-primary"
 						action="#{timelineController.switchToNewsFeed()}" execute="@form"
 						render="tweets" />
-					<a4j:commandButton value="Mentions" styleClass="btn btn-default"
+					<a4j:commandButton value="Mentions" styleClass="btn btn-primary"
 						action="#{timelineController.switchToMentions()}" execute="@form"
 						render="tweets" />
-				</p>
+				</div>
 			</h:form>
 			<a4j:outputPanel id="tweets">
 				<a4j:repeat value="#{timelineController.tweets}" var="tweet">
-					<div class="panel panel-default">
+					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<h3 class="panel-title">#{tweet.poster}</h3>
 						</div>
@@ -43,7 +44,7 @@
 					<h:inputText value="#{timelineController.searchTerm}"
 						styleClass="form-control top" />
 					<a4j:commandButton value="Search"
-						styleClass="btn btn-default form-control bottom"
+						styleClass="btn btn-primary form-control bottom"
 						action="#{timelineController.switchToSearch()}" execute="@form"
 						render="tweets" />
 				</div>
