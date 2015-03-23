@@ -12,6 +12,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.AccessTimeout;
+import javax.ejb.Lock;
+import javax.ejb.LockType;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -37,6 +40,7 @@ public class TrendWatcher {
 
 	private List<Entry<String, Integer>> trends;
 
+	@Lock(LockType.READ)
 	public List<Entry<String, Integer>> getTrends() {
 		return Collections.unmodifiableList(trends);
 	}
@@ -55,7 +59,8 @@ public class TrendWatcher {
 		computeTrends();
 	}
 
-	@Schedule(hour = "*", minute = "*")
+	@AccessTimeout(-1)
+	@Schedule(hour = "*", minute = "*", second = "0")
 	private void computeTrends() {
 		trends.clear();
 		HashMap<String, Integer> temp = new HashMap<String, Integer>();
