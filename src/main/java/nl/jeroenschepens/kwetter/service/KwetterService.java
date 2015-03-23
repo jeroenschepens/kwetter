@@ -42,7 +42,7 @@ public class KwetterService {
 	}
 
 	public void editUser(User user) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		userDAO.editUser(user);
 	}
 
 	public void removeUser(User user) {
