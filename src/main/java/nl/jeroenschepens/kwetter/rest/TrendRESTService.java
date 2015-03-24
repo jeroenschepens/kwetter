@@ -1,7 +1,6 @@
 package nl.jeroenschepens.kwetter.rest;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-import static javax.ws.rs.core.MediaType.APPLICATION_XML;
 
 import java.util.List;
 import java.util.Map.Entry;
@@ -20,7 +19,7 @@ public class TrendRESTService {
 	private TrendWatcher trendWatcher;
 
 	@GET
-	@Produces({ APPLICATION_JSON, APPLICATION_XML })
+	@Produces(APPLICATION_JSON)
 	public List<Entry<String, Integer>> getTrends() {
 		return trendWatcher.getTrends();
 	}

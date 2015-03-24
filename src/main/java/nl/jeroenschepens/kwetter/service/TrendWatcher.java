@@ -1,5 +1,8 @@
 package nl.jeroenschepens.kwetter.service;
 
+import static javax.ejb.LockType.READ;
+import static javax.ejb.LockType.WRITE;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,7 +17,6 @@ import java.util.regex.Pattern;
 import javax.annotation.PostConstruct;
 import javax.ejb.AccessTimeout;
 import javax.ejb.Lock;
-import javax.ejb.LockType;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -24,6 +26,7 @@ import nl.jeroenschepens.kwetter.dao.JPA;
 import nl.jeroenschepens.kwetter.dao.TweetDAO;
 import nl.jeroenschepens.kwetter.domain.Tweet;
 
+@Lock(READ)
 @Singleton
 @Startup
 public class TrendWatcher {
@@ -40,9 +43,10 @@ public class TrendWatcher {
 
 	private List<Entry<String, Integer>> trends;
 
-	@Lock(LockType.READ)
 	public List<Entry<String, Integer>> getTrends() {
-		return Collections.unmodifiableList(trends);
+		List<Entry<String, Integer>> topics = new ArrayList<>();
+		topics.addAll(trends);
+		return topics;
 	}
 
 	@PostConstruct
@@ -63,6 +67,7 @@ public class TrendWatcher {
 	@Schedule(hour = "*", minute = "*", second = "0")
 	private void computeTrends() {
 		trends.clear();
+		List<Entry<String, Integer>> topics = new ArrayList<>();
 		HashMap<String, Integer> temp = new HashMap<String, Integer>();
 		for (Tweet tweet : tweetDAO.findAll()) {
 			Set<String> set = new HashSet<String>();
@@ -80,12 +85,19 @@ public class TrendWatcher {
 		int i = 0;
 		for (Entry<String, Integer> entry : sortHashMapByValue(temp)) {
 			if (i < 10) {
-				trends.add(entry);
+				topics.add(entry);
 				i++;
 			} else {
 				break;
 			}
 		}
+		writeList(topics);
+	}
+
+	@Lock(WRITE)
+	private void writeList(List<Entry<String, Integer>> trends) {
+		this.trends.clear();
+		this.trends.addAll(trends);
 	}
 
 	private List<Entry<String, Integer>> sortHashMapByValue(
