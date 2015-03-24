@@ -9,11 +9,14 @@
 		<div class="col-sm-8">
 			<h1>#{profileController.selectedUser.name}</h1>
 			<a4j:repeat value="#{profileController.tweets}" var="tweet">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h3 class="panel-title">#{tweet.poster}</h3>
+				<div class="panel panel-primary tweets">
+					<div class="panel-body">
+						<div class="pull-right">
+							#{tweet.postdate} <br />Posted from #{tweet.postedfrom}
+						</div>
+						<h2>@#{tweet.poster}</h2>
+						<h4>#{tweet.tweet}</h4>
 					</div>
-					<div class="panel-body">#{tweet.tweet}</div>
 				</div>
 			</a4j:repeat>
 		</div>

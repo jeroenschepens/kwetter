@@ -12,3 +12,11 @@
 	border-top-left-radius: 0px;
 	border-top-right-radius: 0px;
 }
+
+.tweets h2 {
+	margin-top: 0px;
+}
+
+.tweets h4 {
+	margin-bottom: 0px;
+}
