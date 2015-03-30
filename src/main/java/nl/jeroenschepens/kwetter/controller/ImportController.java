@@ -1,9 +1,14 @@
 package nl.jeroenschepens.kwetter.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.batch.operations.JobOperator;
+import javax.batch.operations.NoSuchJobException;
 import javax.batch.runtime.BatchRuntime;
+import javax.batch.runtime.JobExecution;
+import javax.batch.runtime.JobInstance;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -28,5 +33,20 @@ public class ImportController {
 		Properties props = new Properties();
 		props.setProperty("jsonUrl", url);
 		jobOperator.start(JOB_NAME, props);
+	}
+
+	public List<JobExecution> getJobs() {
+		try {
+			JobOperator jobOperator = BatchRuntime.getJobOperator();
+			List<JobInstance> jobInstances = jobOperator.getJobInstances(
+					JOB_NAME, 0, 100);
+			List<JobExecution> jobs = new ArrayList<>();
+			for (JobInstance jobInstance : jobInstances) {
+				jobs.addAll(jobOperator.getJobExecutions(jobInstance));
+			}
+			return jobs;
+		} catch (NoSuchJobException jx) {
+			return null;
+		}
 	}
 }

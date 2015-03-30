@@ -4,13 +4,40 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
-		<h1>Import</h1>
-		<h:form>
-			<h:inputText value="#{importController.url}" placeholder="JSON URL" />
-			<a4j:commandButton action="#{importController.startTweetImport()}"
-				execute="@form" value="Import tweets" />
-		</h:form>
+		<h1>Import Tweets</h1>
+		<div class="col-sm-4">
+			<h:form>
+				<h:inputText value="#{importController.url}"
+					styleClass="form-control top" p:placeholder="JSON URL" />
+				<a4j:commandButton action="#{importController.startTweetImport()}"
+					execute="@form" render="@all" value=" Import"
+					styleClass="btn btn-primary form-control bottom" />
+			</h:form>
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Execution ID</th>
+					<th>URL</th>
+					<th>Start Time</th>
+					<th>End Time</th>
+					<th>Exit Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				<a4j:repeat value="#{importController.jobs}" var="job">
+					<tr>
+						<td>#{job.executionId}</td>
+						<td>#{job.jobParameters.get('jsonUrl')}</td>
+						<td>#{job.startTime}</td>
+						<td>#{job.endTime}</td>
+						<td>#{job.exitStatus}</td>
+					</tr>
+				</a4j:repeat>
+			</tbody>
+		</table>
 	</ui:define>
 </ui:composition>
