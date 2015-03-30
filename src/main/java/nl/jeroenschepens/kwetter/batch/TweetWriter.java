@@ -20,7 +20,6 @@ public class TweetWriter extends AbstractItemWriter {
 		@SuppressWarnings("unchecked")
 		List<Tweet> tweets = (List<Tweet>) (List<?>) items;
 		for (Tweet tweet : tweets) {
-			System.out.println(tweet);
 			em.persist(tweet);
 		}
 	}
