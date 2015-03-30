@@ -44,4 +44,40 @@ public class Following implements Serializable {
 	public void setFollows(String follows) {
 		this.follows = follows;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((follows == null) ? 0 : follows.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Following other = (Following) obj;
+		if (follows == null) {
+			if (other.follows != null)
+				return false;
+		} else if (!follows.equals(other.follows))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Following [user=" + user + ", follows=" + follows + "]";
+	}
 }
