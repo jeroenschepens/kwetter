@@ -14,4 +14,8 @@
 		<pattern value="/users/#{username}" />
 		<view-id value="/WEB-INF/pages/profile.xhtml" />
 	</url-mapping>
+	<url-mapping id="import">
+		<pattern value="/import" />
+		<view-id value="/WEB-INF/pages/import.xhtml" />
+	</url-mapping>
 </pretty-config>
